@@ -223,6 +223,25 @@ jobs:
     if: github.actor == 'allcontributors[bot]'
     runs-on: ubuntu-latest
     needs: []
+    name: Build GBA
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Instalar dependencias
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi git libpng-dev
+      - name: Compilar
+        run: make -j$(nproc) MODERN=1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: jogo-gba
+          path: "*.gba"
     steps:
       - name: Automatically pass for allcontributors
         run: echo "CI automatically passes for allcontributors" && exit 0
