@@ -184,6 +184,8 @@ void NewGameInitData(void)
     PlayTimeCounter_Reset();
     ClearPokedexFlags();
     InitEventData();
+    for (u32 badgeFlagInit = FLAG_BADGE01_GET; badgeFlagInit < FLAG_BADGE01_GET + NUM_BADGES; badgeFlagInit++)
+        FlagSet(badgeFlagInit); // Mundo livre: sem travas de insignia
     ClearTVShowData();
     ResetGabbyAndTy();
     ClearSecretBases();

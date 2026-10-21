@@ -2216,7 +2216,7 @@ static void MainMenu_FormatSavegameBadges(void)
 
     for (i = FLAG_BADGE01_GET; i < FLAG_BADGE01_GET + NUM_BADGES; i++)
     {
-        if (FlagGet(i))
+        if (FALSE && FlagGet(i)) // insignias ocultas
             badgeCount++;
     }
     StringExpandPlaceholders(gStringVar4, gText_ContinueMenuBadges);

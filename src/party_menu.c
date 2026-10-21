@@ -185,7 +185,7 @@ struct PartyMenuInternal
     u32 spriteIdCancelPokeball:7;
     u32 messageId:14;
     u8 windowId[3];
-    u8 actions[8];
+    u8 actions[12];
     u8 numActions;
     // In vanilla Emerald, only the first 0xB0 hwords (0x160 bytes) are actually used.
     // However, a full 0x100 hwords (0x200 bytes) are allocated.
@@ -2967,6 +2967,23 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
                 AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, j + MENU_FIELD_MOVES);
                 break;
             }
+        }
+    }
+
+    // Surf e Voo livres: aparecem para qualquer Pokemon
+    if (!GetMonData(&mons[slotId], MON_DATA_IS_EGG))
+    {
+        static const u8 sFreeFieldMoves[] = { FIELD_MOVE_SURF, FIELD_MOVE_FLY };
+        for (i = 0; i < ARRAY_COUNT(sFreeFieldMoves); i++)
+        {
+            bool8 alreadyListed = FALSE;
+            for (j = 0; j < sPartyMenuInternal->numActions; j++)
+            {
+                if (sPartyMenuInternal->actions[j] == sFreeFieldMoves[i] + MENU_FIELD_MOVES)
+                    alreadyListed = TRUE;
+            }
+            if (!alreadyListed)
+                AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, sFreeFieldMoves[i] + MENU_FIELD_MOVES);
         }
     }
 

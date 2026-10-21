@@ -2316,6 +2316,33 @@ bool8 ScrCmd_checkfieldmove(struct ScriptContext *ctx)
         return FALSE;
 
     move = FieldMove_GetMoveId(fieldMove);
+    // Golpes de campo livres: qualquer Pokemon pode usar sem saber o golpe
+    switch (fieldMove)
+    {
+    case FIELD_MOVE_CUT:
+    case FIELD_MOVE_FLASH:
+    case FIELD_MOVE_ROCK_SMASH:
+    case FIELD_MOVE_STRENGTH:
+    case FIELD_MOVE_SURF:
+    case FIELD_MOVE_FLY:
+    case FIELD_MOVE_DIVE:
+    case FIELD_MOVE_WATERFALL:
+        for (u32 j = 0; j < PARTY_SIZE; j++)
+        {
+            enum Species freeSpecies = GetMonData(&gParties[B_TRAINER_PLAYER][j], MON_DATA_SPECIES);
+            if (!freeSpecies)
+                break;
+            if (!GetMonData(&gParties[B_TRAINER_PLAYER][j], MON_DATA_IS_EGG))
+            {
+                gSpecialVar_Result = j;
+                gSpecialVar_0x8004 = freeSpecies;
+                return FALSE;
+            }
+        }
+        break;
+    default:
+        break;
+    }
     for (u32 i = 0; i < PARTY_SIZE; i++)
     {
         enum Species species = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES);

@@ -47,7 +47,105 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn::
 	waitmovement 0
 	special HealPlayerParty
 	callnative UpdateFollowingPokemon
+	additem ITEM_RARE_CANDY, 99
+	setflag FLAG_BADGE01_GET
+	setflag FLAG_BADGE02_GET
+	setflag FLAG_BADGE03_GET
+	setflag FLAG_BADGE04_GET
+	setflag FLAG_BADGE05_GET
+	setflag FLAG_BADGE06_GET
+	setflag FLAG_BADGE07_GET
+	setflag FLAG_BADGE08_GET
+	msgbox PkmnCenterNurse_Text_ShopOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, PkmnCenterNurse_OpenShop
 	return
+
+PkmnCenterNurse_OpenShop::
+	pokemart PkmnCenterNurse_ShopItems
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+	.align 2
+PkmnCenterNurse_ShopItems:
+	.2byte ITEM_POKE_BALL
+	.2byte ITEM_GREAT_BALL
+	.2byte ITEM_ULTRA_BALL
+	.2byte ITEM_MASTER_BALL
+	.2byte ITEM_PREMIER_BALL
+	.2byte ITEM_HEAL_BALL
+	.2byte ITEM_NET_BALL
+	.2byte ITEM_NEST_BALL
+	.2byte ITEM_DIVE_BALL
+	.2byte ITEM_DUSK_BALL
+	.2byte ITEM_TIMER_BALL
+	.2byte ITEM_QUICK_BALL
+	.2byte ITEM_REPEAT_BALL
+	.2byte ITEM_LUXURY_BALL
+	.2byte ITEM_LEVEL_BALL
+	.2byte ITEM_LURE_BALL
+	.2byte ITEM_MOON_BALL
+	.2byte ITEM_FRIEND_BALL
+	.2byte ITEM_LOVE_BALL
+	.2byte ITEM_FAST_BALL
+	.2byte ITEM_HEAVY_BALL
+	.2byte ITEM_DREAM_BALL
+	.2byte ITEM_ADAMANT_MINT
+	.2byte ITEM_BOLD_MINT
+	.2byte ITEM_BRAVE_MINT
+	.2byte ITEM_CALM_MINT
+	.2byte ITEM_CAREFUL_MINT
+	.2byte ITEM_GENTLE_MINT
+	.2byte ITEM_HASTY_MINT
+	.2byte ITEM_IMPISH_MINT
+	.2byte ITEM_JOLLY_MINT
+	.2byte ITEM_LAX_MINT
+	.2byte ITEM_LONELY_MINT
+	.2byte ITEM_MILD_MINT
+	.2byte ITEM_MODEST_MINT
+	.2byte ITEM_NAIVE_MINT
+	.2byte ITEM_NAUGHTY_MINT
+	.2byte ITEM_QUIET_MINT
+	.2byte ITEM_RASH_MINT
+	.2byte ITEM_RELAXED_MINT
+	.2byte ITEM_SASSY_MINT
+	.2byte ITEM_SERIOUS_MINT
+	.2byte ITEM_TIMID_MINT
+	.2byte ITEM_X_ATTACK
+	.2byte ITEM_X_DEFENSE
+	.2byte ITEM_X_SP_ATK
+	.2byte ITEM_X_SP_DEF
+	.2byte ITEM_X_SPEED
+	.2byte ITEM_X_ACCURACY
+	.2byte ITEM_DIRE_HIT
+	.2byte ITEM_GUARD_SPEC
+	.2byte ITEM_MAX_POTION
+	.2byte ITEM_FULL_RESTORE
+	.2byte ITEM_REVIVE
+	.2byte ITEM_MAX_REVIVE
+	.2byte ITEM_FULL_HEAL
+	.2byte ITEM_MAX_ETHER
+	.2byte ITEM_MAX_ELIXIR
+	.2byte ITEM_PP_UP
+	.2byte ITEM_PP_MAX
+	.2byte ITEM_LEFTOVERS
+	.2byte ITEM_CHOICE_BAND
+	.2byte ITEM_CHOICE_SPECS
+	.2byte ITEM_CHOICE_SCARF
+	.2byte ITEM_FOCUS_SASH
+	.2byte ITEM_LIFE_ORB
+	.2byte ITEM_SITRUS_BERRY
+	.2byte ITEM_LUM_BERRY
+	.2byte ITEM_ABILITY_CAPSULE
+	.2byte ITEM_ABILITY_PATCH
+	.2byte ITEM_BOTTLE_CAP
+	.2byte ITEM_GOLD_BOTTLE_CAP
+	pokemartlistend
+
+PkmnCenterNurse_Text_ShopOffer:
+	.string "Seus Pokemon estao curados!\n"
+	.string "Rare Candies na sua bolsa.\p"
+	.string "Quer ver a loja do Centro?$"
 
 EventScript_PkmnCenterNurse_CheckTrainerHillAndUnionRoom::
 	specialvar VAR_RESULT, PlayerNotAtTrainerHillEntrance

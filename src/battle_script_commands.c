@@ -10096,6 +10096,25 @@ static void Cmd_handleballthrow(void)
     }
 }
 
+static void MaxOutCaughtMon(struct Pokemon *mon)
+{
+    u32 maxIv = MAX_PER_STAT_IVS;
+    u32 maxEv = MAX_PER_STAT_EVS;
+    SetMonData(mon, MON_DATA_HP_IV, &maxIv);
+    SetMonData(mon, MON_DATA_ATK_IV, &maxIv);
+    SetMonData(mon, MON_DATA_DEF_IV, &maxIv);
+    SetMonData(mon, MON_DATA_SPEED_IV, &maxIv);
+    SetMonData(mon, MON_DATA_SPATK_IV, &maxIv);
+    SetMonData(mon, MON_DATA_SPDEF_IV, &maxIv);
+    SetMonData(mon, MON_DATA_HP_EV, &maxEv);
+    SetMonData(mon, MON_DATA_ATK_EV, &maxEv);
+    SetMonData(mon, MON_DATA_DEF_EV, &maxEv);
+    SetMonData(mon, MON_DATA_SPEED_EV, &maxEv);
+    SetMonData(mon, MON_DATA_SPATK_EV, &maxEv);
+    SetMonData(mon, MON_DATA_SPDEF_EV, &maxEv);
+    CalculateMonStats(mon);
+}
+
 static void Cmd_givecaughtmon(void)
 {
     CMD_ARGS(const u8 *passInstr);
@@ -10202,6 +10221,7 @@ static void Cmd_givecaughtmon(void)
     case GIVECAUGHTMON_GIVE_AND_SHOW_MSG:
     {
         struct Pokemon *caughtMon = GetBattlerMon(GetCatchingBattler());
+        MaxOutCaughtMon(caughtMon);
         if (B_RESTORE_HELD_BATTLE_ITEMS >= GEN_9)
         {
             u16 lostItem = gBattleStruct->itemLost[B_SIDE_OPPONENT][gBattlerPartyIndexes[GetCatchingBattler()]].originalItem;

@@ -842,7 +842,7 @@ static void SetDataFromTrainerCard(void)
 
     for (i = 0, badgeFlag = FLAG_BADGE01_GET; badgeFlag < FLAG_BADGE01_GET + NUM_BADGES; badgeFlag++, i++)
     {
-        if (FlagGet(badgeFlag))
+        if (FALSE && FlagGet(badgeFlag)) // insignias ocultas
             sData->badgeCount[i]++;
     }
 }

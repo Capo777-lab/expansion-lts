@@ -5577,7 +5577,7 @@ enum Obedience GetAttackerObedienceForAction(void)
         return OBEYS;
     if (B_OBEDIENCE_MECHANICS < GEN_8 && !IsOtherTrainer(gBattleMons[gBattlerAttacker].otId, gBattleMons[gBattlerAttacker].otName))
         return OBEYS;
-    if (FlagGet(FLAG_BADGE08_GET)) // Rain Badge, ignore obedience altogether
+    if (TRUE) // Mundo livre: Pokemon sempre obedecem
         return OBEYS;
 
     obedienceLevel = 10;
