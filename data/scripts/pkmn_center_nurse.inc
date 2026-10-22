@@ -47,7 +47,8 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn::
 	waitmovement 0
 	special HealPlayerParty
 	callnative UpdateFollowingPokemon
-	additem ITEM_RARE_CANDY, 99
+	msgbox PkmnCenterNurse_Text_CandyOffer, MSGBOX_YESNO
+	call_if_eq VAR_RESULT, YES, PkmnCenterNurse_GiveCandies
 	setflag FLAG_BADGE01_GET
 	setflag FLAG_BADGE02_GET
 	setflag FLAG_BADGE03_GET
@@ -58,6 +59,10 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn::
 	setflag FLAG_BADGE08_GET
 	msgbox PkmnCenterNurse_Text_ShopOffer, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, PkmnCenterNurse_OpenShop
+	return
+
+PkmnCenterNurse_GiveCandies::
+	additem ITEM_RARE_CANDY, 100
 	return
 
 PkmnCenterNurse_OpenShop::
@@ -143,9 +148,12 @@ PkmnCenterNurse_ShopItems:
 	pokemartlistend
 
 PkmnCenterNurse_Text_ShopOffer:
-	.string "Seus Pokemon estao curados!\n"
-	.string "Rare Candies na sua bolsa.\p"
+	.string "Seus Pokemon estao curados!\p"
 	.string "Quer ver a loja do Centro?$"
+
+PkmnCenterNurse_Text_CandyOffer:
+	.string "Quer pegar 100 Rare Candies\n"
+	.string "gratis?$"
 
 EventScript_PkmnCenterNurse_CheckTrainerHillAndUnionRoom::
 	specialvar VAR_RESULT, PlayerNotAtTrainerHillEntrance

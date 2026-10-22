@@ -105,6 +105,7 @@ LittlerootTown_OnFrame:
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 1, LittlerootTown_EventScript_StepOffTruckMale
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 2, LittlerootTown_EventScript_StepOffTruckFemale
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_EventScript_BeginDexUpgradeScene
+	map_script_2 VAR_UNUSED_0x404E, 0, LittlerootTown_EventScript_FreeStart
 	.2byte 0
 
 LittlerootTown_EventScript_StepOffTruckMale::
@@ -1014,3 +1015,289 @@ LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 	.string "I have something to show you.\n"
 	.string "Let's go to my LAB.$"
 
+
+LittlerootTown_EventScript_FreeStart::
+	lockall
+LittlerootTown_EventScript_FreeStartGenMenu::
+	msgbox LittlerootTown_Text_ChooseGen, MSGBOX_DEFAULT
+	dynmultichoice 1, 1, TRUE, 5, 0, DYN_MULTICHOICE_CB_NONE, FreeStart_Text_Gen1, FreeStart_Text_Gen2, FreeStart_Text_Gen3, FreeStart_Text_Gen4, FreeStart_Text_Gen5, FreeStart_Text_Gen6, FreeStart_Text_Gen7, FreeStart_Text_Gen8, FreeStart_Text_Gen9
+	goto_if_eq VAR_RESULT, 0, LittlerootTown_EventScript_FreeStartGen1
+	goto_if_eq VAR_RESULT, 1, LittlerootTown_EventScript_FreeStartGen2
+	goto_if_eq VAR_RESULT, 2, LittlerootTown_EventScript_FreeStartGen3
+	goto_if_eq VAR_RESULT, 3, LittlerootTown_EventScript_FreeStartGen4
+	goto_if_eq VAR_RESULT, 4, LittlerootTown_EventScript_FreeStartGen5
+	goto_if_eq VAR_RESULT, 5, LittlerootTown_EventScript_FreeStartGen6
+	goto_if_eq VAR_RESULT, 6, LittlerootTown_EventScript_FreeStartGen7
+	goto_if_eq VAR_RESULT, 7, LittlerootTown_EventScript_FreeStartGen8
+	goto_if_eq VAR_RESULT, 8, LittlerootTown_EventScript_FreeStartGen9
+	goto LittlerootTown_EventScript_FreeStartGenMenu
+
+LittlerootTown_EventScript_FreeStartGen1::
+	msgbox LittlerootTown_Text_ChooseStarter, MSGBOX_DEFAULT
+	dynmultichoice 1, 1, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, FreeStart_Text_G1_1, FreeStart_Text_G1_2, FreeStart_Text_G1_3
+	goto_if_eq VAR_RESULT, 0, LittlerootTown_EventScript_FreeStartGive_BULBASAUR
+	goto_if_eq VAR_RESULT, 1, LittlerootTown_EventScript_FreeStartGive_CHARMANDER
+	goto_if_eq VAR_RESULT, 2, LittlerootTown_EventScript_FreeStartGive_SQUIRTLE
+	goto LittlerootTown_EventScript_FreeStartGenMenu
+
+LittlerootTown_EventScript_FreeStartGive_BULBASAUR::
+	givemon SPECIES_BULBASAUR, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGive_CHARMANDER::
+	givemon SPECIES_CHARMANDER, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGive_SQUIRTLE::
+	givemon SPECIES_SQUIRTLE, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGen2::
+	msgbox LittlerootTown_Text_ChooseStarter, MSGBOX_DEFAULT
+	dynmultichoice 1, 1, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, FreeStart_Text_G2_1, FreeStart_Text_G2_2, FreeStart_Text_G2_3
+	goto_if_eq VAR_RESULT, 0, LittlerootTown_EventScript_FreeStartGive_CHIKORITA
+	goto_if_eq VAR_RESULT, 1, LittlerootTown_EventScript_FreeStartGive_CYNDAQUIL
+	goto_if_eq VAR_RESULT, 2, LittlerootTown_EventScript_FreeStartGive_TOTODILE
+	goto LittlerootTown_EventScript_FreeStartGenMenu
+
+LittlerootTown_EventScript_FreeStartGive_CHIKORITA::
+	givemon SPECIES_CHIKORITA, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGive_CYNDAQUIL::
+	givemon SPECIES_CYNDAQUIL, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGive_TOTODILE::
+	givemon SPECIES_TOTODILE, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGen3::
+	msgbox LittlerootTown_Text_ChooseStarter, MSGBOX_DEFAULT
+	dynmultichoice 1, 1, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, FreeStart_Text_G3_1, FreeStart_Text_G3_2, FreeStart_Text_G3_3
+	goto_if_eq VAR_RESULT, 0, LittlerootTown_EventScript_FreeStartGive_TREECKO
+	goto_if_eq VAR_RESULT, 1, LittlerootTown_EventScript_FreeStartGive_TORCHIC
+	goto_if_eq VAR_RESULT, 2, LittlerootTown_EventScript_FreeStartGive_MUDKIP
+	goto LittlerootTown_EventScript_FreeStartGenMenu
+
+LittlerootTown_EventScript_FreeStartGive_TREECKO::
+	givemon SPECIES_TREECKO, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGive_TORCHIC::
+	givemon SPECIES_TORCHIC, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGive_MUDKIP::
+	givemon SPECIES_MUDKIP, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGen4::
+	msgbox LittlerootTown_Text_ChooseStarter, MSGBOX_DEFAULT
+	dynmultichoice 1, 1, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, FreeStart_Text_G4_1, FreeStart_Text_G4_2, FreeStart_Text_G4_3
+	goto_if_eq VAR_RESULT, 0, LittlerootTown_EventScript_FreeStartGive_TURTWIG
+	goto_if_eq VAR_RESULT, 1, LittlerootTown_EventScript_FreeStartGive_CHIMCHAR
+	goto_if_eq VAR_RESULT, 2, LittlerootTown_EventScript_FreeStartGive_PIPLUP
+	goto LittlerootTown_EventScript_FreeStartGenMenu
+
+LittlerootTown_EventScript_FreeStartGive_TURTWIG::
+	givemon SPECIES_TURTWIG, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGive_CHIMCHAR::
+	givemon SPECIES_CHIMCHAR, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGive_PIPLUP::
+	givemon SPECIES_PIPLUP, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGen5::
+	msgbox LittlerootTown_Text_ChooseStarter, MSGBOX_DEFAULT
+	dynmultichoice 1, 1, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, FreeStart_Text_G5_1, FreeStart_Text_G5_2, FreeStart_Text_G5_3
+	goto_if_eq VAR_RESULT, 0, LittlerootTown_EventScript_FreeStartGive_SNIVY
+	goto_if_eq VAR_RESULT, 1, LittlerootTown_EventScript_FreeStartGive_TEPIG
+	goto_if_eq VAR_RESULT, 2, LittlerootTown_EventScript_FreeStartGive_OSHAWOTT
+	goto LittlerootTown_EventScript_FreeStartGenMenu
+
+LittlerootTown_EventScript_FreeStartGive_SNIVY::
+	givemon SPECIES_SNIVY, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGive_TEPIG::
+	givemon SPECIES_TEPIG, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGive_OSHAWOTT::
+	givemon SPECIES_OSHAWOTT, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGen6::
+	msgbox LittlerootTown_Text_ChooseStarter, MSGBOX_DEFAULT
+	dynmultichoice 1, 1, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, FreeStart_Text_G6_1, FreeStart_Text_G6_2, FreeStart_Text_G6_3
+	goto_if_eq VAR_RESULT, 0, LittlerootTown_EventScript_FreeStartGive_CHESPIN
+	goto_if_eq VAR_RESULT, 1, LittlerootTown_EventScript_FreeStartGive_FENNEKIN
+	goto_if_eq VAR_RESULT, 2, LittlerootTown_EventScript_FreeStartGive_FROAKIE
+	goto LittlerootTown_EventScript_FreeStartGenMenu
+
+LittlerootTown_EventScript_FreeStartGive_CHESPIN::
+	givemon SPECIES_CHESPIN, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGive_FENNEKIN::
+	givemon SPECIES_FENNEKIN, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGive_FROAKIE::
+	givemon SPECIES_FROAKIE, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGen7::
+	msgbox LittlerootTown_Text_ChooseStarter, MSGBOX_DEFAULT
+	dynmultichoice 1, 1, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, FreeStart_Text_G7_1, FreeStart_Text_G7_2, FreeStart_Text_G7_3
+	goto_if_eq VAR_RESULT, 0, LittlerootTown_EventScript_FreeStartGive_ROWLET
+	goto_if_eq VAR_RESULT, 1, LittlerootTown_EventScript_FreeStartGive_LITTEN
+	goto_if_eq VAR_RESULT, 2, LittlerootTown_EventScript_FreeStartGive_POPPLIO
+	goto LittlerootTown_EventScript_FreeStartGenMenu
+
+LittlerootTown_EventScript_FreeStartGive_ROWLET::
+	givemon SPECIES_ROWLET, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGive_LITTEN::
+	givemon SPECIES_LITTEN, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGive_POPPLIO::
+	givemon SPECIES_POPPLIO, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGen8::
+	msgbox LittlerootTown_Text_ChooseStarter, MSGBOX_DEFAULT
+	dynmultichoice 1, 1, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, FreeStart_Text_G8_1, FreeStart_Text_G8_2, FreeStart_Text_G8_3
+	goto_if_eq VAR_RESULT, 0, LittlerootTown_EventScript_FreeStartGive_GROOKEY
+	goto_if_eq VAR_RESULT, 1, LittlerootTown_EventScript_FreeStartGive_SCORBUNNY
+	goto_if_eq VAR_RESULT, 2, LittlerootTown_EventScript_FreeStartGive_SOBBLE
+	goto LittlerootTown_EventScript_FreeStartGenMenu
+
+LittlerootTown_EventScript_FreeStartGive_GROOKEY::
+	givemon SPECIES_GROOKEY, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGive_SCORBUNNY::
+	givemon SPECIES_SCORBUNNY, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGive_SOBBLE::
+	givemon SPECIES_SOBBLE, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGen9::
+	msgbox LittlerootTown_Text_ChooseStarter, MSGBOX_DEFAULT
+	dynmultichoice 1, 1, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, FreeStart_Text_G9_1, FreeStart_Text_G9_2, FreeStart_Text_G9_3
+	goto_if_eq VAR_RESULT, 0, LittlerootTown_EventScript_FreeStartGive_SPRIGATITO
+	goto_if_eq VAR_RESULT, 1, LittlerootTown_EventScript_FreeStartGive_FUECOCO
+	goto_if_eq VAR_RESULT, 2, LittlerootTown_EventScript_FreeStartGive_QUAXLY
+	goto LittlerootTown_EventScript_FreeStartGenMenu
+
+LittlerootTown_EventScript_FreeStartGive_SPRIGATITO::
+	givemon SPECIES_SPRIGATITO, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGive_FUECOCO::
+	givemon SPECIES_FUECOCO, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartGive_QUAXLY::
+	givemon SPECIES_QUAXLY, 5
+	goto LittlerootTown_EventScript_FreeStartDone
+
+LittlerootTown_EventScript_FreeStartDone::
+	setvar VAR_UNUSED_0x404E, 1
+	msgbox LittlerootTown_Text_FreeStartDone, MSGBOX_DEFAULT
+	releaseall
+	end
+
+LittlerootTown_Text_ChooseGen:
+	.string "Escolha a geracao do seu\n"
+	.string "Pokemon inicial.$"
+
+LittlerootTown_Text_ChooseStarter:
+	.string "Qual sera o seu parceiro?$"
+
+LittlerootTown_Text_FreeStartDone:
+	.string "O mundo e todo seu.\n"
+	.string "Boa aventura!$"
+
+FreeStart_Text_Gen1:
+	.string "Gen 1 - Kanto$"
+FreeStart_Text_G1_1:
+	.string "Bulbasaur$"
+FreeStart_Text_G1_2:
+	.string "Charmander$"
+FreeStart_Text_G1_3:
+	.string "Squirtle$"
+FreeStart_Text_Gen2:
+	.string "Gen 2 - Johto$"
+FreeStart_Text_G2_1:
+	.string "Chikorita$"
+FreeStart_Text_G2_2:
+	.string "Cyndaquil$"
+FreeStart_Text_G2_3:
+	.string "Totodile$"
+FreeStart_Text_Gen3:
+	.string "Gen 3 - Hoenn$"
+FreeStart_Text_G3_1:
+	.string "Treecko$"
+FreeStart_Text_G3_2:
+	.string "Torchic$"
+FreeStart_Text_G3_3:
+	.string "Mudkip$"
+FreeStart_Text_Gen4:
+	.string "Gen 4 - Sinnoh$"
+FreeStart_Text_G4_1:
+	.string "Turtwig$"
+FreeStart_Text_G4_2:
+	.string "Chimchar$"
+FreeStart_Text_G4_3:
+	.string "Piplup$"
+FreeStart_Text_Gen5:
+	.string "Gen 5 - Unova$"
+FreeStart_Text_G5_1:
+	.string "Snivy$"
+FreeStart_Text_G5_2:
+	.string "Tepig$"
+FreeStart_Text_G5_3:
+	.string "Oshawott$"
+FreeStart_Text_Gen6:
+	.string "Gen 6 - Kalos$"
+FreeStart_Text_G6_1:
+	.string "Chespin$"
+FreeStart_Text_G6_2:
+	.string "Fennekin$"
+FreeStart_Text_G6_3:
+	.string "Froakie$"
+FreeStart_Text_Gen7:
+	.string "Gen 7 - Alola$"
+FreeStart_Text_G7_1:
+	.string "Rowlet$"
+FreeStart_Text_G7_2:
+	.string "Litten$"
+FreeStart_Text_G7_3:
+	.string "Popplio$"
+FreeStart_Text_Gen8:
+	.string "Gen 8 - Galar$"
+FreeStart_Text_G8_1:
+	.string "Grookey$"
+FreeStart_Text_G8_2:
+	.string "Scorbunny$"
+FreeStart_Text_G8_3:
+	.string "Sobble$"
+FreeStart_Text_Gen9:
+	.string "Gen 9 - Paldea$"
+FreeStart_Text_G9_1:
+	.string "Sprigatito$"
+FreeStart_Text_G9_2:
+	.string "Fuecoco$"
+FreeStart_Text_G9_3:
+	.string "Quaxly$"

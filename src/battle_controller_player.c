@@ -2450,14 +2450,15 @@ static u32 CheckTargetTypeEffectiveness(enum BattlerId battler)
 static void MoveSelectionDisplayMoveEffectiveness(u32 foeEffectiveness, enum BattlerId battler)
 {
     static const u8 noIcon[] =  _("");
-    static const u8 effectiveIcon[] =  _("{CIRCLE_HOLLOW}");
-    static const u8 superEffectiveIcon[] =  _("{CIRCLE_DOT}");
-    static const u8 notVeryEffectiveIcon[] =  _("{TRIANGLE}");
-    static const u8 immuneIcon[] =  _("{BIG_MULT_X}");
+    static const u8 effectiveIcon[] =  _("EFET.");
+    static const u8 superEffectiveIcon[] =  _("SUPER");
+    static const u8 notVeryEffectiveIcon[] =  _("POUCO");
+    static const u8 immuneIcon[] =  _("NADA");
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
     u8 *txtPtr;
 
-    txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfacePP);
+    txtPtr = gDisplayedStringBattle;
+    *txtPtr = EOS;
 
     if (!IsBattleMoveStatus(moveInfo->moves[gMoveSelectionCursor[battler]]))
     {
