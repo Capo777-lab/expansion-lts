@@ -165,3 +165,8 @@ void GetProfOaksRatingMessage(void)
     ShowFieldMessage(GetProfOaksRatingMessageByCount(gSpecialVar_0x8004));
 }
 
+
+void CountCaughtForQuest(void)
+{
+    gSpecialVar_Result = GetNationalPokedexCount(FLAG_GET_CAUGHT);
+}

@@ -66,13 +66,22 @@ void FillPalette(u32 value, u32 offset, u32 size)
     CpuFill16(value, &gPlttBufferFaded[offset], size);
 }
 
+// Pokemon Treta Geral: o jogo inteiro em preto e branco com curva de contraste
+static const u8 sTretaGrayCurve[32] = { 0, 0, 1, 2, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16, 17, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 29, 30, 31, 31 };
+
 void TransferPlttBuffer(void)
 {
     if (!gPaletteFade.bufferTransferDisabled)
     {
-        void *src = gPlttBufferFaded;
-        void *dest = (void *)PLTT;
-        DmaCopy16(3, src, dest, PLTT_SIZE);
+        const u16 *src = gPlttBufferFaded;
+        vu16 *dest = (vu16 *)PLTT;
+        for (u32 palIdx = 0; palIdx < PLTT_SIZE / sizeof(u16); palIdx++)
+        {
+            u32 color = src[palIdx];
+            u32 lum = ((color & 0x1F) * 77 + ((color >> 5) & 0x1F) * 150 + ((color >> 10) & 0x1F) * 29) >> 8;
+            u32 gray = sTretaGrayCurve[lum];
+            dest[palIdx] = gray | (gray << 5) | (gray << 10);
+        }
         sPlttBufferTransferPending = FALSE;
         if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)
             UpdateBlendRegisters();

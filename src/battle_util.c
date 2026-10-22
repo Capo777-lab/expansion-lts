@@ -8015,6 +8015,35 @@ s32 GetAdjustedDamage(struct DamageContext *ctx, s32 damage)
     return damage;
 }
 
+static s32 ApplyDifficultyToDamage(enum BattlerId battlerAtk, s32 damage)
+{
+    u32 mode = VarGet(VAR_UNUSED_0x4083); // 1 Nunca Jogou, 2 Facil, 3 Normal, 4 Dificil
+    u32 percent = 100;
+
+    if (damage <= 1)
+        return damage;
+
+    if (GetBattlerSide(battlerAtk) == B_SIDE_PLAYER)
+    {
+        if (mode == 1)
+            percent = 200;
+        else if (mode == 2)
+            percent = 150;
+    }
+    else
+    {
+        if (mode == 1)
+            percent = 25;
+        else if (mode == 2)
+            percent = 50;
+        else if (mode == 4)
+            percent = 140;
+    }
+
+    damage = damage * percent / 100;
+    return damage < 1 ? 1 : damage;
+}
+
 s32 CalculateMoveDamage(struct DamageContext *ctx)
 {
     s32 damage = 0;
@@ -8024,7 +8053,7 @@ s32 CalculateMoveDamage(struct DamageContext *ctx)
     else
         damage = DoMoveDamageCalc(ctx);
 
-    return GetAdjustedDamage(ctx, damage);
+    return ApplyDifficultyToDamage(ctx->battlerAtk, GetAdjustedDamage(ctx, damage));
 }
 
 // for AI so that typeEffectivenessModifier, weather, abilities and holdEffects are calculated only once

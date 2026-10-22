@@ -69,6 +69,8 @@ enum
     MENU_ACTION_PYRAMID_BAG,
     MENU_ACTION_DEBUG,
     MENU_ACTION_DEXNAV,
+    MENU_ACTION_QUESTS,
+    MENU_ACTION_TELEPORT,
 };
 
 // Save status
@@ -111,6 +113,8 @@ static bool8 StartMenuBattlePyramidRetireCallback(void);
 static bool8 StartMenuBattlePyramidBagCallback(void);
 static bool8 StartMenuDebugCallback(void);
 static bool8 StartMenuDexNavCallback(void);
+static bool8 StartMenuQuestsCallback(void);
+static bool8 StartMenuTeleportCallback(void);
 
 // Menu callbacks
 static bool8 SaveStartCallback(void);
@@ -189,6 +193,9 @@ static const struct WindowTemplate sWindowTemplate_PyramidPeak = {
 
 static const u8 sText_MenuDebug[] = _("DEBUG");
 
+static const u8 sText_MenuQuests[] = _("MISSOES");
+static const u8 sText_MenuTeleport[] = _("VIAJAR");
+
 static const struct MenuAction sStartMenuItems[] =
 {
     [MENU_ACTION_POKEDEX]         = {gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback}},
@@ -206,6 +213,8 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_PYRAMID_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBattlePyramidBagCallback}},
     [MENU_ACTION_DEBUG]           = {sText_MenuDebug,   {.u8_void = StartMenuDebugCallback}},
     [MENU_ACTION_DEXNAV]          = {gText_MenuDexNav,  {.u8_void = StartMenuDexNavCallback}},
+    [MENU_ACTION_QUESTS]          = {sText_MenuQuests,  {.u8_void = StartMenuQuestsCallback}},
+    [MENU_ACTION_TELEPORT]        = {sText_MenuTeleport, {.u8_void = StartMenuTeleportCallback}},
 };
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
@@ -348,7 +357,8 @@ static void BuildNormalStartMenu(void)
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);
-    AddStartMenuAction(MENU_ACTION_EXIT);
+    AddStartMenuAction(MENU_ACTION_QUESTS);
+    AddStartMenuAction(MENU_ACTION_TELEPORT);
 }
 
 static void BuildDebugStartMenu(void)
@@ -1503,6 +1513,25 @@ void AppendToList(u8 *list, u8 *pos, u8 newEntry)
 {
     list[*pos] = newEntry;
     (*pos)++;
+}
+
+extern const u8 EventScript_QuestLog[];
+extern const u8 EventScript_Teleport[];
+
+static bool8 StartMenuQuestsCallback(void)
+{
+    RemoveExtraStartMenuWindows();
+    HideStartMenu();
+    ScriptContext_SetupScript(EventScript_QuestLog);
+    return TRUE;
+}
+
+static bool8 StartMenuTeleportCallback(void)
+{
+    RemoveExtraStartMenuWindows();
+    HideStartMenu();
+    ScriptContext_SetupScript(EventScript_Teleport);
+    return TRUE;
 }
 
 static bool8 StartMenuDexNavCallback(void)

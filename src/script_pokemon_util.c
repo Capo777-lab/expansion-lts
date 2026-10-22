@@ -131,6 +131,17 @@ void CreateScriptedWildMon(enum Species species, u8 level, enum Item item)
         heldItem[1] = item >> 8;
         SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM, heldItem);
     }
+    if (VarGet(VAR_UNUSED_0x40B8) == 1) // chefe de raid
+    {
+        static const u16 sBossStatIds[] = { MON_DATA_HP_IV, MON_DATA_ATK_IV, MON_DATA_DEF_IV, MON_DATA_SPEED_IV, MON_DATA_SPATK_IV, MON_DATA_SPDEF_IV,
+                                            MON_DATA_HP_EV, MON_DATA_ATK_EV, MON_DATA_DEF_EV, MON_DATA_SPEED_EV, MON_DATA_SPATK_EV, MON_DATA_SPDEF_EV };
+        for (u32 bossIdx = 0; bossIdx < ARRAY_COUNT(sBossStatIds); bossIdx++)
+        {
+            u32 bossValue = (bossIdx < 6) ? MAX_PER_STAT_IVS : MAX_PER_STAT_EVS;
+            SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], sBossStatIds[bossIdx], &bossValue);
+        }
+        CalculateMonStats(&gParties[B_TRAINER_OPPONENT_A][0]);
+    }
 }
 void CreateScriptedDoubleWildMon(enum Species species1, u8 level1, enum Item item1, enum Species species2, u8 level2, enum Item item2)
 {

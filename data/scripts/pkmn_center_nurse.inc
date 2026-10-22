@@ -47,8 +47,7 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn::
 	waitmovement 0
 	special HealPlayerParty
 	callnative UpdateFollowingPokemon
-	msgbox PkmnCenterNurse_Text_CandyOffer, MSGBOX_YESNO
-	call_if_eq VAR_RESULT, YES, PkmnCenterNurse_GiveCandies
+	call PkmnCenterNurse_ServiceMenu
 	setflag FLAG_BADGE01_GET
 	setflag FLAG_BADGE02_GET
 	setflag FLAG_BADGE03_GET
@@ -57,8 +56,6 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn::
 	setflag FLAG_BADGE06_GET
 	setflag FLAG_BADGE07_GET
 	setflag FLAG_BADGE08_GET
-	msgbox PkmnCenterNurse_Text_ShopOffer, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, PkmnCenterNurse_OpenShop
 	return
 
 PkmnCenterNurse_GiveCandies::

@@ -1213,6 +1213,7 @@ LittlerootTown_EventScript_FreeStartGive_QUAXLY::
 	goto LittlerootTown_EventScript_FreeStartDone
 
 LittlerootTown_EventScript_FreeStartDone::
+	call Difficulty_Choose
 	setvar VAR_UNUSED_0x404E, 1
 	msgbox LittlerootTown_Text_FreeStartDone, MSGBOX_DEFAULT
 	releaseall
