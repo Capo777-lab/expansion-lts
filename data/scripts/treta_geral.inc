@@ -1735,3 +1735,167 @@ Raid_Tier_4:
 	.string "Lendaria - Nv 100$"
 Raid_Tier_Exit:
 	.string "Voltar$"
+
+AIPlayer_Interact::
+	lock
+	faceplayer
+	msgbox AIPlayer_Text_Hello, MSGBOX_DEFAULT
+	dynmultichoice 1, 1, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, AI_Text_Battle, AI_Text_Chat, AI_Text_Leave
+	goto_if_eq VAR_RESULT, 0, AIPlayer_Battle
+	goto_if_eq VAR_RESULT, 1, AIPlayer_Chat
+	release
+	end
+
+AIPlayer_Chat::
+	random 4
+	goto_if_eq VAR_RESULT, 0, AIPlayer_Chat_0
+	goto_if_eq VAR_RESULT, 1, AIPlayer_Chat_1
+	goto_if_eq VAR_RESULT, 2, AIPlayer_Chat_2
+	goto AIPlayer_Chat_3
+
+AIPlayer_Chat_0::
+	msgbox AIPlayer_Text_Chat_0, MSGBOX_DEFAULT
+	release
+	end
+
+AIPlayer_Chat_1::
+	msgbox AIPlayer_Text_Chat_1, MSGBOX_DEFAULT
+	release
+	end
+
+AIPlayer_Chat_2::
+	msgbox AIPlayer_Text_Chat_2, MSGBOX_DEFAULT
+	release
+	end
+
+AIPlayer_Chat_3::
+	msgbox AIPlayer_Text_Chat_3, MSGBOX_DEFAULT
+	release
+	end
+
+AIPlayer_Battle::
+	msgbox AIPlayer_Text_Accept, MSGBOX_DEFAULT
+	random 14
+	goto_if_eq VAR_RESULT, 0, AIPlayer_Fight_0
+	goto_if_eq VAR_RESULT, 1, AIPlayer_Fight_1
+	goto_if_eq VAR_RESULT, 2, AIPlayer_Fight_2
+	goto_if_eq VAR_RESULT, 3, AIPlayer_Fight_3
+	goto_if_eq VAR_RESULT, 4, AIPlayer_Fight_4
+	goto_if_eq VAR_RESULT, 5, AIPlayer_Fight_5
+	goto_if_eq VAR_RESULT, 6, AIPlayer_Fight_6
+	goto_if_eq VAR_RESULT, 7, AIPlayer_Fight_7
+	goto_if_eq VAR_RESULT, 8, AIPlayer_Fight_8
+	goto_if_eq VAR_RESULT, 9, AIPlayer_Fight_9
+	goto_if_eq VAR_RESULT, 10, AIPlayer_Fight_10
+	goto_if_eq VAR_RESULT, 11, AIPlayer_Fight_11
+	goto_if_eq VAR_RESULT, 12, AIPlayer_Fight_12
+	goto_if_eq VAR_RESULT, 13, AIPlayer_Fight_13
+	release
+	end
+
+AIPlayer_Fight_0::
+	trainerbattle_no_intro TRAINER_SIDNEY, AIPlayer_Text_Defeat
+	msgbox AIPlayer_Text_After, MSGBOX_DEFAULT
+	release
+	end
+
+AIPlayer_Fight_1::
+	trainerbattle_no_intro TRAINER_PHOEBE, AIPlayer_Text_Defeat
+	msgbox AIPlayer_Text_After, MSGBOX_DEFAULT
+	release
+	end
+
+AIPlayer_Fight_2::
+	trainerbattle_no_intro TRAINER_GLACIA, AIPlayer_Text_Defeat
+	msgbox AIPlayer_Text_After, MSGBOX_DEFAULT
+	release
+	end
+
+AIPlayer_Fight_3::
+	trainerbattle_no_intro TRAINER_DRAKE, AIPlayer_Text_Defeat
+	msgbox AIPlayer_Text_After, MSGBOX_DEFAULT
+	release
+	end
+
+AIPlayer_Fight_4::
+	trainerbattle_no_intro TRAINER_ROXANNE_1, AIPlayer_Text_Defeat
+	msgbox AIPlayer_Text_After, MSGBOX_DEFAULT
+	release
+	end
+
+AIPlayer_Fight_5::
+	trainerbattle_no_intro TRAINER_BRAWLY_1, AIPlayer_Text_Defeat
+	msgbox AIPlayer_Text_After, MSGBOX_DEFAULT
+	release
+	end
+
+AIPlayer_Fight_6::
+	trainerbattle_no_intro TRAINER_WATTSON_1, AIPlayer_Text_Defeat
+	msgbox AIPlayer_Text_After, MSGBOX_DEFAULT
+	release
+	end
+
+AIPlayer_Fight_7::
+	trainerbattle_no_intro TRAINER_FLANNERY_1, AIPlayer_Text_Defeat
+	msgbox AIPlayer_Text_After, MSGBOX_DEFAULT
+	release
+	end
+
+AIPlayer_Fight_8::
+	trainerbattle_no_intro TRAINER_NORMAN_1, AIPlayer_Text_Defeat
+	msgbox AIPlayer_Text_After, MSGBOX_DEFAULT
+	release
+	end
+
+AIPlayer_Fight_9::
+	trainerbattle_no_intro TRAINER_WINONA_1, AIPlayer_Text_Defeat
+	msgbox AIPlayer_Text_After, MSGBOX_DEFAULT
+	release
+	end
+
+AIPlayer_Fight_10::
+	trainerbattle_no_intro TRAINER_TATE_AND_LIZA_1, AIPlayer_Text_Defeat
+	msgbox AIPlayer_Text_After, MSGBOX_DEFAULT
+	release
+	end
+
+AIPlayer_Fight_11::
+	trainerbattle_no_intro TRAINER_JUAN_1, AIPlayer_Text_Defeat
+	msgbox AIPlayer_Text_After, MSGBOX_DEFAULT
+	release
+	end
+
+AIPlayer_Fight_12::
+	trainerbattle_no_intro TRAINER_WALLACE, AIPlayer_Text_Defeat
+	msgbox AIPlayer_Text_After, MSGBOX_DEFAULT
+	release
+	end
+
+AIPlayer_Fight_13::
+	trainerbattle_no_intro TRAINER_STEVEN, AIPlayer_Text_Defeat
+	msgbox AIPlayer_Text_After, MSGBOX_DEFAULT
+	release
+	end
+
+AIPlayer_Text_Hello:
+	.string "Oi! Sou um jogador IA.\nO que vamos fazer?$"
+AIPlayer_Text_Accept:
+	.string "Vamos la! Mostre o que sabe!$"
+AIPlayer_Text_Defeat:
+	.string "Voce e muito bom!$"
+AIPlayer_Text_After:
+	.string "Foi uma otima batalha!\nVolte quando quiser.$"
+AI_Text_Battle:
+	.string "Batalhar$"
+AI_Text_Chat:
+	.string "Conversar$"
+AI_Text_Leave:
+	.string "Sair$"
+AIPlayer_Text_Chat_0:
+	.string "Hoje o dia esta otimo\npara treinar!$"
+AIPlayer_Text_Chat_1:
+	.string "A torre do Pokecenter esta\ncheia de treinadores fortes.$"
+AIPlayer_Text_Chat_2:
+	.string "Dica: veja as MISSOES no\nStart para ganhar lendarios.$"
+AIPlayer_Text_Chat_3:
+	.string "Se quiser desafio, tente\numa raid Lendaria!$"
