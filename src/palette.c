@@ -75,7 +75,8 @@ void TransferPlttBuffer(void)
     {
         const u16 *src = gPlttBufferFaded;
         vu16 *dest = (vu16 *)PLTT;
-        for (u32 palIdx = 0; palIdx < PLTT_SIZE / sizeof(u16); palIdx++)
+        DmaCopy16(3, src, (void *)PLTT, PLTT_SIZE);
+        for (u32 palIdx = 13 * 16; palIdx < 16 * 16; palIdx++)
         {
             u32 color = src[palIdx];
             u32 lum = ((color & 0x1F) * 77 + ((color >> 5) & 0x1F) * 150 + ((color >> 10) & 0x1F) * 29) >> 8;

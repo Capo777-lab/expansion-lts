@@ -122,6 +122,10 @@ Tower_Won::
 Raid_Start::
 	msgbox Raid_Text_Intro, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, PkmnCenterNurse_ServiceMenu
+	msgbox Raid_Text_Tier, MSGBOX_DEFAULT
+	dynmultichoice 1, 1, FALSE, 5, 0, DYN_MULTICHOICE_CB_NONE, Raid_Tier_1, Raid_Tier_2, Raid_Tier_3, Raid_Tier_4, Raid_Tier_Exit
+	goto_if_ge VAR_RESULT, 4, PkmnCenterNurse_ServiceMenu
+	copyvar VAR_0x800A, VAR_RESULT
 	random 14
 	goto_if_eq VAR_RESULT, 0, Raid_Boss_0
 	goto_if_eq VAR_RESULT, 1, Raid_Boss_1
@@ -140,8 +144,48 @@ Raid_Start::
 	goto PkmnCenterNurse_ServiceMenu
 
 Raid_Boss_0::
+	goto_if_eq VAR_0x800A, 0, Raid_Boss_0_T0
+	goto_if_eq VAR_0x800A, 1, Raid_Boss_0_T1
+	goto_if_eq VAR_0x800A, 2, Raid_Boss_0_T2
+	goto_if_eq VAR_0x800A, 3, Raid_Boss_0_T3
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_0_T0::
 	setvar VAR_UNUSED_0x40B8, 1
-	setwildbattle SPECIES_MEWTWO, 75
+	setwildbattle SPECIES_MEWTWO, 50
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_0_T1::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_MEWTWO, 70
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_0_T2::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_MEWTWO, 90
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_0_T3::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_MEWTWO, 100
 	dowildbattle
 	setvar VAR_UNUSED_0x40B8, 0
 	specialvar VAR_RESULT, GetBattleOutcome
@@ -151,8 +195,48 @@ Raid_Boss_0::
 	goto PkmnCenterNurse_ServiceMenu
 
 Raid_Boss_1::
+	goto_if_eq VAR_0x800A, 0, Raid_Boss_1_T0
+	goto_if_eq VAR_0x800A, 1, Raid_Boss_1_T1
+	goto_if_eq VAR_0x800A, 2, Raid_Boss_1_T2
+	goto_if_eq VAR_0x800A, 3, Raid_Boss_1_T3
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_1_T0::
 	setvar VAR_UNUSED_0x40B8, 1
-	setwildbattle SPECIES_RAYQUAZA, 75
+	setwildbattle SPECIES_RAYQUAZA, 50
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_1_T1::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_RAYQUAZA, 70
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_1_T2::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_RAYQUAZA, 90
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_1_T3::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_RAYQUAZA, 100
 	dowildbattle
 	setvar VAR_UNUSED_0x40B8, 0
 	specialvar VAR_RESULT, GetBattleOutcome
@@ -162,8 +246,48 @@ Raid_Boss_1::
 	goto PkmnCenterNurse_ServiceMenu
 
 Raid_Boss_2::
+	goto_if_eq VAR_0x800A, 0, Raid_Boss_2_T0
+	goto_if_eq VAR_0x800A, 1, Raid_Boss_2_T1
+	goto_if_eq VAR_0x800A, 2, Raid_Boss_2_T2
+	goto_if_eq VAR_0x800A, 3, Raid_Boss_2_T3
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_2_T0::
 	setvar VAR_UNUSED_0x40B8, 1
-	setwildbattle SPECIES_KYOGRE, 75
+	setwildbattle SPECIES_KYOGRE, 50
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_2_T1::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_KYOGRE, 70
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_2_T2::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_KYOGRE, 90
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_2_T3::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_KYOGRE, 100
 	dowildbattle
 	setvar VAR_UNUSED_0x40B8, 0
 	specialvar VAR_RESULT, GetBattleOutcome
@@ -173,8 +297,48 @@ Raid_Boss_2::
 	goto PkmnCenterNurse_ServiceMenu
 
 Raid_Boss_3::
+	goto_if_eq VAR_0x800A, 0, Raid_Boss_3_T0
+	goto_if_eq VAR_0x800A, 1, Raid_Boss_3_T1
+	goto_if_eq VAR_0x800A, 2, Raid_Boss_3_T2
+	goto_if_eq VAR_0x800A, 3, Raid_Boss_3_T3
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_3_T0::
 	setvar VAR_UNUSED_0x40B8, 1
-	setwildbattle SPECIES_GROUDON, 75
+	setwildbattle SPECIES_GROUDON, 50
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_3_T1::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_GROUDON, 70
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_3_T2::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_GROUDON, 90
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_3_T3::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_GROUDON, 100
 	dowildbattle
 	setvar VAR_UNUSED_0x40B8, 0
 	specialvar VAR_RESULT, GetBattleOutcome
@@ -184,8 +348,48 @@ Raid_Boss_3::
 	goto PkmnCenterNurse_ServiceMenu
 
 Raid_Boss_4::
+	goto_if_eq VAR_0x800A, 0, Raid_Boss_4_T0
+	goto_if_eq VAR_0x800A, 1, Raid_Boss_4_T1
+	goto_if_eq VAR_0x800A, 2, Raid_Boss_4_T2
+	goto_if_eq VAR_0x800A, 3, Raid_Boss_4_T3
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_4_T0::
 	setvar VAR_UNUSED_0x40B8, 1
-	setwildbattle SPECIES_LUGIA, 75
+	setwildbattle SPECIES_LUGIA, 50
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_4_T1::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_LUGIA, 70
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_4_T2::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_LUGIA, 90
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_4_T3::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_LUGIA, 100
 	dowildbattle
 	setvar VAR_UNUSED_0x40B8, 0
 	specialvar VAR_RESULT, GetBattleOutcome
@@ -195,8 +399,48 @@ Raid_Boss_4::
 	goto PkmnCenterNurse_ServiceMenu
 
 Raid_Boss_5::
+	goto_if_eq VAR_0x800A, 0, Raid_Boss_5_T0
+	goto_if_eq VAR_0x800A, 1, Raid_Boss_5_T1
+	goto_if_eq VAR_0x800A, 2, Raid_Boss_5_T2
+	goto_if_eq VAR_0x800A, 3, Raid_Boss_5_T3
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_5_T0::
 	setvar VAR_UNUSED_0x40B8, 1
-	setwildbattle SPECIES_HO_OH, 75
+	setwildbattle SPECIES_HO_OH, 50
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_5_T1::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_HO_OH, 70
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_5_T2::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_HO_OH, 90
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_5_T3::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_HO_OH, 100
 	dowildbattle
 	setvar VAR_UNUSED_0x40B8, 0
 	specialvar VAR_RESULT, GetBattleOutcome
@@ -206,8 +450,48 @@ Raid_Boss_5::
 	goto PkmnCenterNurse_ServiceMenu
 
 Raid_Boss_6::
+	goto_if_eq VAR_0x800A, 0, Raid_Boss_6_T0
+	goto_if_eq VAR_0x800A, 1, Raid_Boss_6_T1
+	goto_if_eq VAR_0x800A, 2, Raid_Boss_6_T2
+	goto_if_eq VAR_0x800A, 3, Raid_Boss_6_T3
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_6_T0::
 	setvar VAR_UNUSED_0x40B8, 1
-	setwildbattle SPECIES_LATIAS, 75
+	setwildbattle SPECIES_LATIAS, 50
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_6_T1::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_LATIAS, 70
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_6_T2::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_LATIAS, 90
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_6_T3::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_LATIAS, 100
 	dowildbattle
 	setvar VAR_UNUSED_0x40B8, 0
 	specialvar VAR_RESULT, GetBattleOutcome
@@ -217,8 +501,48 @@ Raid_Boss_6::
 	goto PkmnCenterNurse_ServiceMenu
 
 Raid_Boss_7::
+	goto_if_eq VAR_0x800A, 0, Raid_Boss_7_T0
+	goto_if_eq VAR_0x800A, 1, Raid_Boss_7_T1
+	goto_if_eq VAR_0x800A, 2, Raid_Boss_7_T2
+	goto_if_eq VAR_0x800A, 3, Raid_Boss_7_T3
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_7_T0::
 	setvar VAR_UNUSED_0x40B8, 1
-	setwildbattle SPECIES_LATIOS, 75
+	setwildbattle SPECIES_LATIOS, 50
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_7_T1::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_LATIOS, 70
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_7_T2::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_LATIOS, 90
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_7_T3::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_LATIOS, 100
 	dowildbattle
 	setvar VAR_UNUSED_0x40B8, 0
 	specialvar VAR_RESULT, GetBattleOutcome
@@ -228,8 +552,48 @@ Raid_Boss_7::
 	goto PkmnCenterNurse_ServiceMenu
 
 Raid_Boss_8::
+	goto_if_eq VAR_0x800A, 0, Raid_Boss_8_T0
+	goto_if_eq VAR_0x800A, 1, Raid_Boss_8_T1
+	goto_if_eq VAR_0x800A, 2, Raid_Boss_8_T2
+	goto_if_eq VAR_0x800A, 3, Raid_Boss_8_T3
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_8_T0::
 	setvar VAR_UNUSED_0x40B8, 1
-	setwildbattle SPECIES_GIRATINA, 75
+	setwildbattle SPECIES_GIRATINA, 50
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_8_T1::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_GIRATINA, 70
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_8_T2::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_GIRATINA, 90
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_8_T3::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_GIRATINA, 100
 	dowildbattle
 	setvar VAR_UNUSED_0x40B8, 0
 	specialvar VAR_RESULT, GetBattleOutcome
@@ -239,8 +603,48 @@ Raid_Boss_8::
 	goto PkmnCenterNurse_ServiceMenu
 
 Raid_Boss_9::
+	goto_if_eq VAR_0x800A, 0, Raid_Boss_9_T0
+	goto_if_eq VAR_0x800A, 1, Raid_Boss_9_T1
+	goto_if_eq VAR_0x800A, 2, Raid_Boss_9_T2
+	goto_if_eq VAR_0x800A, 3, Raid_Boss_9_T3
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_9_T0::
 	setvar VAR_UNUSED_0x40B8, 1
-	setwildbattle SPECIES_DIALGA, 75
+	setwildbattle SPECIES_DIALGA, 50
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_9_T1::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_DIALGA, 70
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_9_T2::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_DIALGA, 90
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_9_T3::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_DIALGA, 100
 	dowildbattle
 	setvar VAR_UNUSED_0x40B8, 0
 	specialvar VAR_RESULT, GetBattleOutcome
@@ -250,8 +654,48 @@ Raid_Boss_9::
 	goto PkmnCenterNurse_ServiceMenu
 
 Raid_Boss_10::
+	goto_if_eq VAR_0x800A, 0, Raid_Boss_10_T0
+	goto_if_eq VAR_0x800A, 1, Raid_Boss_10_T1
+	goto_if_eq VAR_0x800A, 2, Raid_Boss_10_T2
+	goto_if_eq VAR_0x800A, 3, Raid_Boss_10_T3
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_10_T0::
 	setvar VAR_UNUSED_0x40B8, 1
-	setwildbattle SPECIES_PALKIA, 75
+	setwildbattle SPECIES_PALKIA, 50
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_10_T1::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_PALKIA, 70
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_10_T2::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_PALKIA, 90
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_10_T3::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_PALKIA, 100
 	dowildbattle
 	setvar VAR_UNUSED_0x40B8, 0
 	specialvar VAR_RESULT, GetBattleOutcome
@@ -261,8 +705,48 @@ Raid_Boss_10::
 	goto PkmnCenterNurse_ServiceMenu
 
 Raid_Boss_11::
+	goto_if_eq VAR_0x800A, 0, Raid_Boss_11_T0
+	goto_if_eq VAR_0x800A, 1, Raid_Boss_11_T1
+	goto_if_eq VAR_0x800A, 2, Raid_Boss_11_T2
+	goto_if_eq VAR_0x800A, 3, Raid_Boss_11_T3
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_11_T0::
 	setvar VAR_UNUSED_0x40B8, 1
-	setwildbattle SPECIES_ARCEUS, 75
+	setwildbattle SPECIES_ARCEUS, 50
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_11_T1::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_ARCEUS, 70
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_11_T2::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_ARCEUS, 90
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_11_T3::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_ARCEUS, 100
 	dowildbattle
 	setvar VAR_UNUSED_0x40B8, 0
 	specialvar VAR_RESULT, GetBattleOutcome
@@ -272,8 +756,48 @@ Raid_Boss_11::
 	goto PkmnCenterNurse_ServiceMenu
 
 Raid_Boss_12::
+	goto_if_eq VAR_0x800A, 0, Raid_Boss_12_T0
+	goto_if_eq VAR_0x800A, 1, Raid_Boss_12_T1
+	goto_if_eq VAR_0x800A, 2, Raid_Boss_12_T2
+	goto_if_eq VAR_0x800A, 3, Raid_Boss_12_T3
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_12_T0::
 	setvar VAR_UNUSED_0x40B8, 1
-	setwildbattle SPECIES_ZEKROM, 75
+	setwildbattle SPECIES_ZEKROM, 50
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_12_T1::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_ZEKROM, 70
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_12_T2::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_ZEKROM, 90
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_12_T3::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_ZEKROM, 100
 	dowildbattle
 	setvar VAR_UNUSED_0x40B8, 0
 	specialvar VAR_RESULT, GetBattleOutcome
@@ -283,8 +807,48 @@ Raid_Boss_12::
 	goto PkmnCenterNurse_ServiceMenu
 
 Raid_Boss_13::
+	goto_if_eq VAR_0x800A, 0, Raid_Boss_13_T0
+	goto_if_eq VAR_0x800A, 1, Raid_Boss_13_T1
+	goto_if_eq VAR_0x800A, 2, Raid_Boss_13_T2
+	goto_if_eq VAR_0x800A, 3, Raid_Boss_13_T3
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_13_T0::
 	setvar VAR_UNUSED_0x40B8, 1
-	setwildbattle SPECIES_RESHIRAM, 75
+	setwildbattle SPECIES_RESHIRAM, 50
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_13_T1::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_RESHIRAM, 70
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_13_T2::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_RESHIRAM, 90
+	dowildbattle
+	setvar VAR_UNUSED_0x40B8, 0
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Raid_Complete
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Raid_Complete
+	msgbox Raid_Text_Failed, MSGBOX_DEFAULT
+	goto PkmnCenterNurse_ServiceMenu
+
+Raid_Boss_13_T3::
+	setvar VAR_UNUSED_0x40B8, 1
+	setwildbattle SPECIES_RESHIRAM, 100
 	dowildbattle
 	setvar VAR_UNUSED_0x40B8, 0
 	specialvar VAR_RESULT, GetBattleOutcome
@@ -1158,3 +1722,16 @@ TP_Name_13:
 	.string "Sootopolis City$"
 TP_Name_14:
 	.string "Verdanturf Town$"
+
+Raid_Text_Tier:
+	.string "Escolha a dificuldade\nda raid.$"
+Raid_Tier_1:
+	.string "Facil - Nv 50$"
+Raid_Tier_2:
+	.string "Media - Nv 70$"
+Raid_Tier_3:
+	.string "Dificil - Nv 90$"
+Raid_Tier_4:
+	.string "Lendaria - Nv 100$"
+Raid_Tier_Exit:
+	.string "Voltar$"

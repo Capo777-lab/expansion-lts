@@ -220,7 +220,12 @@ void NewGameInitData(void)
     else
         RunScriptImmediately(EventScript_ResetAllMapFlags);
     if (!IS_FRLG)
+    {
         RunScriptImmediately(FreeStart_Setup);
+        for (u32 dexNum = 1; dexNum <= NATIONAL_DEX_COUNT; dexNum++)
+            GetSetPokedexFlag(dexNum, FLAG_SET_SEEN);
+        gSaveBlock2Ptr->pokedex.mode = DEX_MODE_NATIONAL;
+    }
 #if IS_FRLG
         StringCopy(gSaveBlock1Ptr->rivalName, rivalName);
 #endif

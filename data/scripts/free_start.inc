@@ -1,4 +1,5 @@
 FreeStart_Setup::
+	setflag FLAG_UNUSED_0x020
 	setflag FLAG_SYS_POKEMON_GET
 	setflag FLAG_SYS_POKEDEX_GET
 	setflag FLAG_SYS_POKENAV_GET
