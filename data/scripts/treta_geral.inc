@@ -1740,9 +1740,10 @@ AIPlayer_Interact::
 	lock
 	faceplayer
 	msgbox AIPlayer_Text_Hello, MSGBOX_DEFAULT
-	dynmultichoice 1, 1, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, AI_Text_Battle, AI_Text_Chat, AI_Text_Leave
+	dynmultichoice 1, 1, FALSE, 4, 0, DYN_MULTICHOICE_CB_NONE, AI_Text_Battle, AI_Text_Chat, AI_Text_Story, AI_Text_Leave
 	goto_if_eq VAR_RESULT, 0, AIPlayer_Battle
 	goto_if_eq VAR_RESULT, 1, AIPlayer_Chat
+	goto_if_eq VAR_RESULT, 2, AIPlayer_Story
 	release
 	end
 
@@ -1899,3 +1900,61 @@ AIPlayer_Text_Chat_2:
 	.string "Dica: veja as MISSOES no\nStart para ganhar lendarios.$"
 AIPlayer_Text_Chat_3:
 	.string "Se quiser desafio, tente\numa raid Lendaria!$"
+
+AIPlayer_Story::
+	goto_if_eq VAR_UNUSED_0x40DB, 0, AIPlayer_Story_0
+	goto_if_eq VAR_UNUSED_0x40DB, 1, AIPlayer_Story_1
+	goto_if_eq VAR_UNUSED_0x40DB, 2, AIPlayer_Story_2
+	goto_if_eq VAR_UNUSED_0x40DB, 3, AIPlayer_Story_3
+	goto_if_eq VAR_UNUSED_0x40DB, 4, AIPlayer_Story_4
+	goto AIPlayer_Story_5
+
+AIPlayer_Story_0::
+	msgbox AIPlayer_Text_Story_0, MSGBOX_DEFAULT
+	addvar VAR_UNUSED_0x40DB, 1
+	release
+	end
+
+AIPlayer_Story_1::
+	msgbox AIPlayer_Text_Story_1, MSGBOX_DEFAULT
+	addvar VAR_UNUSED_0x40DB, 1
+	release
+	end
+
+AIPlayer_Story_2::
+	msgbox AIPlayer_Text_Story_2, MSGBOX_DEFAULT
+	addvar VAR_UNUSED_0x40DB, 1
+	release
+	end
+
+AIPlayer_Story_3::
+	msgbox AIPlayer_Text_Story_3, MSGBOX_DEFAULT
+	addvar VAR_UNUSED_0x40DB, 1
+	release
+	end
+
+AIPlayer_Story_4::
+	msgbox AIPlayer_Text_Story_4, MSGBOX_DEFAULT
+	addvar VAR_UNUSED_0x40DB, 1
+	release
+	end
+
+AIPlayer_Story_5::
+	msgbox AIPlayer_Text_Story_5, MSGBOX_DEFAULT
+	release
+	end
+
+AI_Text_Story:
+	.string "Historia$"
+AIPlayer_Text_Story_0:
+	.string "Antigamente, os ginasios\ndecidiam quem era campeao.\pUm dia, a Treta Geral\ncomecou e tudo mudou.$"
+AIPlayer_Text_Story_1:
+	.string "Os lendarios despertaram e\nespalharam energia pelo mundo.\pDizem que quem enfrenta as\nraids ouve seus ecos.$"
+AIPlayer_Text_Story_2:
+	.string "A Torre de Batalha surgiu\nnos Pokecenters.\pLa, treinadores de todas as\nregioes testam suas forcas.$"
+AIPlayer_Text_Story_3:
+	.string "Todos os Pokemon do mundo\nvoltaram a viver aqui.\pDe Kanto a Paldea, nenhum\nfoi esquecido.$"
+AIPlayer_Text_Story_4:
+	.string "Os jogadores IA sao ecos de\nantigos campeoes.\pEles vagam pelas cidades\nem busca de duelos.$"
+AIPlayer_Text_Story_5:
+	.string "Quando as missoes forem\ncompletas, o caminho do\ntitulo se abrira.\pO resto da historia\ndepende de voce.$"
