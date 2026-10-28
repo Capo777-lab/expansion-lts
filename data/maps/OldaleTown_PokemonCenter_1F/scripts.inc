@@ -1,7 +1,12 @@
 OldaleTown_PokemonCenter_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, OldaleTown_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, OldaleTown_PokemonCenter_1F_OnFrame
 	.byte 0
+
+OldaleTown_PokemonCenter_1F_OnFrame:
+	map_script_2 VAR_UNUSED_0x404E, 0, LittlerootTown_EventScript_FreeStart
+	.2byte 0
 
 OldaleTown_PokemonCenter_1F_OnTransition:
 	setrespawn HEAL_LOCATION_OLDALE_TOWN

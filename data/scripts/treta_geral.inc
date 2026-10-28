@@ -1,7 +1,7 @@
 
 PkmnCenterNurse_ServiceMenu::
 	msgbox PkmnCenterNurse_Text_ServiceAsk, MSGBOX_DEFAULT
-	dynmultichoice 1, 1, FALSE, 6, 0, DYN_MULTICHOICE_CB_NONE, Svc_Text_Candy, Svc_Text_Shop, Svc_Text_Tower, Svc_Text_Raid, Svc_Text_Quests, Svc_Text_Difficulty, Svc_Text_Teleport, Svc_Text_Exit
+	dynmultichoice 1, 1, FALSE, 6, 0, DYN_MULTICHOICE_CB_NONE, Svc_Text_Candy, Svc_Text_Shop, Svc_Text_Tower, Svc_Text_Raid, Svc_Text_Quests, Svc_Text_Difficulty, Svc_Text_Teleport, Svc_Text_Story, Svc_Text_Exit
 	goto_if_eq VAR_RESULT, 0, PkmnCenterNurse_Svc_Candy
 	goto_if_eq VAR_RESULT, 1, PkmnCenterNurse_OpenShop
 	goto_if_eq VAR_RESULT, 2, Tower_Start
@@ -9,7 +9,12 @@ PkmnCenterNurse_ServiceMenu::
 	goto_if_eq VAR_RESULT, 4, PkmnCenterNurse_Svc_Quests
 	goto_if_eq VAR_RESULT, 5, PkmnCenterNurse_Svc_Difficulty
 	goto_if_eq VAR_RESULT, 6, PkmnCenterNurse_Svc_Teleport
+	goto_if_eq VAR_RESULT, 7, PkmnCenterNurse_Svc_Story
 	return
+
+PkmnCenterNurse_Svc_Story::
+	call Story_Main
+	goto PkmnCenterNurse_ServiceMenu
 
 PkmnCenterNurse_Svc_Teleport::
 	call Teleport_Menu
@@ -1340,12 +1345,13 @@ EventScript_QuestLog::
 
 QuestLog_Menu::
 	msgbox QL_Text_Header, MSGBOX_DEFAULT
-	dynmultichoice 1, 1, FALSE, 6, 0, DYN_MULTICHOICE_CB_NONE, QL_Name_1, QL_Name_2, QL_Name_3, QL_Name_4, QL_Name_5, QL_Name_Exit
+	dynmultichoice 1, 1, FALSE, 6, 0, DYN_MULTICHOICE_CB_NONE, QL_Name_1, QL_Name_2, QL_Name_3, QL_Name_4, QL_Name_5, QL_Name_Story, QL_Name_Exit
 	goto_if_eq VAR_RESULT, 0, QuestLog_Q1
 	goto_if_eq VAR_RESULT, 1, QuestLog_Q2
 	goto_if_eq VAR_RESULT, 2, QuestLog_Q3
 	goto_if_eq VAR_RESULT, 3, QuestLog_Q4
 	goto_if_eq VAR_RESULT, 4, QuestLog_Q5
+	goto_if_eq VAR_RESULT, 5, QuestLog_Story
 	return
 
 QuestLog_Claimed::

@@ -1216,7 +1216,8 @@ LittlerootTown_EventScript_FreeStartDone::
 	call Difficulty_Choose
 	callnative UpdateFollowingPokemon
 	setvar VAR_UNUSED_0x404E, 1
-	msgbox LittlerootTown_Text_FreeStartDone, MSGBOX_DEFAULT
+	setvar VAR_UNUSED_0x40DC, 1
+	call Story_Prologue
 	releaseall
 	end
 

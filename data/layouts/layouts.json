@@ -9323,6 +9323,17 @@
       "border_filepath": "data/layouts/OneIsland_KindleRoad_EmberSpa_Frlg/border.bin",
       "blockdata_filepath": "data/layouts/OneIsland_KindleRoad_EmberSpa_Frlg/map.bin",
       "layout_version": "frlg"
+    },
+    {
+      "id": "LAYOUT_TRETA_CONTINENTE",
+      "name": "TretaContinente_Layout",
+      "width": 64,
+      "height": 48,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Fortree",
+      "border_filepath": "data/layouts/TretaContinente/border.bin",
+      "blockdata_filepath": "data/layouts/TretaContinente/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
