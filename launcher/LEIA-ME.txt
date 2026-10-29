@@ -1,0 +1,17 @@
+TRETA LAUNCHER
+
+COMO USAR
+1. Baixe o TretaLauncher.exe (aba Actions do GitHub > "Build Launcher" > Artifacts).
+2. Coloque o .exe numa pasta propria (ele cria as pastas "jogo" e "backups" ao lado).
+3. Instale o mGBA (mgba.io) e, em CONFIGURACOES, aponte o caminho do mGBA.exe
+   (se colocar a pasta "mgba" ao lado do launcher, ele acha sozinho).
+4. Clique em ATUALIZAR e escolha o .gba (ou o .zip baixado do GitHub).
+5. Clique em JOGAR.
+
+ATUALIZACAO AUTOMATICA (opcional)
+Em CONFIGURACOES preencha:
+- Repositorio: seu-usuario/seu-repositorio
+- Token: um token pessoal do GitHub com permissao de leitura em "Actions"
+Depois o botao ATUALIZAR baixa sozinho a versao mais nova do build.
+
+O launcher nao inclui o jogo nem o emulador: voce usa o seu proprio .gba.

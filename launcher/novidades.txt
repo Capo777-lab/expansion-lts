@@ -1,0 +1,16 @@
+POKEMON TRETA GERAL
+
+Bem-vindo, treinador!
+
+NESTA VERSAO
+- Historia "A Lenda do Eco" comecando no Pokecentro de Oldale.
+- Continente Eco: fragmentos, duelistas e o Altar do Eco.
+- Missoes pelo menu Start, torre de batalha e raids com 4 dificuldades.
+- Jogadores IA que batalham, conversam e contam a historia.
+- Todos os Pokemon nao lendarios nos encontros selvagens.
+- Pokemon seguindo voce e XP compartilhado.
+
+DICAS
+- Fale com a enfermeira para abrir os menus da torre, raid e historia.
+- Use o menu VIAJAR do Start para ir a qualquer cidade.
+- Faca BACKUP DO SAVE antes de atualizar.
